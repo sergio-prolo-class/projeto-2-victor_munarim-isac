@@ -1,7 +1,6 @@
 package ifsc.joe.ui;
 
 import ifsc.joe.enums.Direcao;
-
 import javax.swing.*;
 import java.util.Random;
 
@@ -62,15 +61,9 @@ public class PainelControles {
     private void configurarBotoesCriacao() {
         bCriaAldeao.addActionListener(e -> criarAldeaoAleatorio());
 
-        bCriaArqueiro.addActionListener(e -> {
-            //TODO: Implementar criação de arqueiro
-            mostrarMensagemNaoImplementado("Criar Arqueiro");
-        });
+        bCriaCavaleiro.addActionListener(e -> criarCavaleiroAleatorio());
 
-        bCriaCavaleiro.addActionListener(e -> {
-            //TODO: Implementar criação de cavaleiro
-            mostrarMensagemNaoImplementado("Criar Cavaleiro");
-        });
+        bCriaArqueiro.addActionListener(e -> criarArqueiroAleatorio());
     }
 
     /**
@@ -89,6 +82,22 @@ public class PainelControles {
         int posY = sorteio.nextInt(painelTela.getHeight() - PADDING);
 
         getTela().criarAldeao(posX, posY);
+    }
+
+    private void criarCavaleiroAleatorio() {
+        final int PADDING = 50;
+        int posX = sorteio.nextInt(painelTela.getWidth() - PADDING);
+        int posY = sorteio.nextInt(painelTela.getHeight() - PADDING);
+
+        getTela().criarCavaleiro(posX, posY);
+    }
+
+    private void criarArqueiroAleatorio() {
+        final int PADDING = 50;
+        int posX = sorteio.nextInt(painelTela.getWidth() - PADDING);
+        int posY = sorteio.nextInt(painelTela.getHeight() - PADDING);
+
+        getTela().criarArqueiro(posX, posY);
     }
 
     /**
