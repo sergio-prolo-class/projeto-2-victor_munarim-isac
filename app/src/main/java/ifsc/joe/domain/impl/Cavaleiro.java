@@ -4,14 +4,22 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Cavaleiro extends Personagem implements Guerreiro, ComMontaria {
-    public static final String NOME_IMAGEM = "cavaleiro";
+    public static final String NOME_IMAGEM;
+    public static final int VIDA_MAXIMA;
+
     private boolean atacando;
     private boolean montado;
+
+    static {
+        NOME_IMAGEM = "cavaleiro";
+        VIDA_MAXIMA = 20;
+    }
 
     public Cavaleiro(int posX, int posY) {
         super(posX, posY, NOME_IMAGEM);
         this.montado = true;
         this.atacando = false;
+        vida = 20;
     }
 
     public void atacar() {
@@ -28,5 +36,7 @@ public class Cavaleiro extends Personagem implements Guerreiro, ComMontaria {
         Image icone = this.carregarImagem(NOME_IMAGEM);
         // desenhando de fato a imagem no pai
         g.drawImage(icone, this.getPosX(), this.getPosY(), painel);
+        //Cria a barra de vida do personagem
+        criarBarraVida(g, vida, VIDA_MAXIMA);
     }
 }

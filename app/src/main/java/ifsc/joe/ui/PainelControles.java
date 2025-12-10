@@ -108,7 +108,7 @@ public class PainelControles {
      * Cria um aldeão em posição aleatória na tela.
      */
     private void criarAldeaoAleatorio() {
-        final int PADDING = 50;
+        final int PADDING = 65;
         int posX = sorteio.nextInt(painelTela.getWidth() - PADDING);
         int posY = sorteio.nextInt(painelTela.getHeight() - PADDING);
 
@@ -116,7 +116,7 @@ public class PainelControles {
     }
 
     private void criarCavaleiroAleatorio() {
-        final int PADDING = 50;
+        final int PADDING = 65;
         int posX = sorteio.nextInt(painelTela.getWidth() - PADDING);
         int posY = sorteio.nextInt(painelTela.getHeight() - PADDING);
 
@@ -124,7 +124,7 @@ public class PainelControles {
     }
 
     private void criarArqueiroAleatorio() {
-        final int PADDING = 50;
+        final int PADDING = 65;
         int posX = sorteio.nextInt(painelTela.getWidth() - PADDING);
         int posY = sorteio.nextInt(painelTela.getHeight() - PADDING);
 

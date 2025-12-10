@@ -14,9 +14,7 @@ public class Tela extends JPanel {
     private final Set<Personagem> personagens;
 
     public Tela() {
-
         //TODO preciso ser melhorado
-
         this.setBackground(Color.white);
         this.personagens = new HashSet<>();
     }
@@ -51,6 +49,13 @@ public class Tela extends JPanel {
         this.personagens.add(aldeao);
     }
 
+    /**
+     * Cria um cavaleiro nas coordenadas X e Y, desenha-o neste JPanel
+     * e adiciona o mesmo na lista de cavaleiros
+     *
+     * @param x coordenada X
+     * @param y coordenada Y
+     */
     public void criarCavaleiro(int x, int y) {
         Cavaleiro cavaleiro = new Cavaleiro(x, y);
         cavaleiro.desenhar(super.getGraphics(), this);
@@ -111,9 +116,7 @@ public class Tela extends JPanel {
      * Altera o estado do arqueiro de atacando para não atacando e vice-versa
      */
     public void atacarArqueiro() {
-
         //TODO preciso ser melhorado
-
         // Percorrendo a lista de aldeões e pedindo para todos atacarem
         this.personagens.forEach(personagem -> {
             if (personagem instanceof Arqueiro p) {

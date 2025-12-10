@@ -7,6 +7,7 @@ import java.util.Objects;
 
 public abstract class Personagem {
     private int posX, posY;
+    protected int vida;
     private final Image icone;
 
     public Personagem(int posX, int posY, String nomeImagem) {
@@ -38,7 +39,38 @@ public abstract class Personagem {
 
         //Não deixa a imagem ser desenhada fora dos limites do JPanel pai
         this.posX = Math.min(Math.max(0, this.posX), maxLargura - this.icone.getWidth(null));
-        this.posY = Math.min(Math.max(0, this.posY), maxAltura - this.icone.getHeight(null));
+        // 12 por conta da barra de vida
+        this.posY = Math.min(Math.max(12, this.posY), maxAltura - this.icone.getHeight(null));
+    }
+
+    // Quando o personagem receber dano terá que dar um repaint na tela
+    public void criarBarraVida(Graphics g, int vida, int VIDA_MAXIMA){
+        int x = getPosX();
+        int y = getPosY() - 12;
+        int larguraTotal = 40;
+        int altura = 10;
+
+        // Fundo
+        g.setColor(Color.LIGHT_GRAY);
+        g.fillRect(x, y, larguraTotal, altura);
+
+        // Vida atual
+        int larguraVida = (vida * larguraTotal) / VIDA_MAXIMA;
+
+        // Cor baseada na porcentagem
+        double porcentagem = (double) vida / VIDA_MAXIMA;
+        if (porcentagem > 0.5) {
+            g.setColor(Color.GREEN);
+        } else if (porcentagem > 0.25) {
+            g.setColor(Color.YELLOW);
+        } else {
+            g.setColor(Color.RED);
+        }
+        g.fillRect(x, y, larguraVida, altura);
+
+        // Borda
+        g.setColor(Color.BLACK);
+        g.drawRect(x, y, larguraTotal, altura);
     }
 
     public int getPosX() {

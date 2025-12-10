@@ -4,13 +4,21 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Aldeao extends Personagem implements Coletador, ComMontaria {
-    public static final String NOME_IMAGEM = "aldeao";
+    public static final String NOME_IMAGEM;
+    public static final int VIDA_MAXIMA;
+
     private boolean coletando;
     private boolean montado;
+
+    static {
+        NOME_IMAGEM = "aldeao";
+        VIDA_MAXIMA = 10;
+    }
 
     public Aldeao(int posX, int posY) {
         super(posX, posY, NOME_IMAGEM);
         this.montado = false;
+        vida = 10;
     }
 
     public void coletar() {
@@ -26,5 +34,7 @@ public class Aldeao extends Personagem implements Coletador, ComMontaria {
         Image icone = this.carregarImagem(NOME_IMAGEM + (coletando ? "2" : ""));
         // desenhando de fato a imagem no pai
         g.drawImage(icone, this.getPosX(), this.getPosY(), painel);
+        //Cria a barra de vida do personagem
+        criarBarraVida(g, vida, VIDA_MAXIMA);
     }
 }
