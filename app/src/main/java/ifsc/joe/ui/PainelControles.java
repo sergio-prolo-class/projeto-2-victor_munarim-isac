@@ -49,10 +49,28 @@ public class PainelControles {
      * Configura todos os listeners dos botões de movimento
      */
     private void configurarBotoesMovimento() {
-        buttonCima.addActionListener(e -> getTela().movimentarAldeoes(Direcao.CIMA));
-        buttonBaixo.addActionListener(e -> getTela().movimentarAldeoes(Direcao.BAIXO));
-        buttonEsquerda.addActionListener(e -> getTela().movimentarAldeoes(Direcao.ESQUERDA));
-        buttonDireita.addActionListener(e -> getTela().movimentarAldeoes(Direcao.DIREITA));
+        buttonCima.addActionListener(e -> this.condicionalParaMovimentar(Direcao.CIMA));
+        buttonBaixo.addActionListener(e -> this.condicionalParaMovimentar(Direcao.BAIXO));
+        buttonEsquerda.addActionListener(e -> this.condicionalParaMovimentar(Direcao.ESQUERDA));
+        buttonDireita.addActionListener(e -> this.condicionalParaMovimentar(Direcao.DIREITA));
+    }
+
+    private void condicionalParaMovimentar(Direcao direcao) {
+        if (this.todosRadioButton.isSelected()) {
+            getTela().movimentarTodos(direcao);
+        } else {
+            if (this.aldeaoRadioButton.isSelected()) {
+                getTela().movimentarAldeoes(direcao);
+            }
+
+            if (this.arqueiroRadioButton.isSelected()) {
+                getTela().movimentarArqueiro(direcao);
+            }
+
+            if (this.cavaleiroRadioButton.isSelected()) {
+                getTela().movimentarCavaleiro(direcao);
+            }
+        }
     }
 
     /**
@@ -70,7 +88,20 @@ public class PainelControles {
      * Configura o listener do botão de ataque
      */
     private void configurarBotaoAtaque() {
-        atacarButton.addActionListener(e -> getTela().atacarAldeoes());
+        atacarButton.addActionListener(e -> {
+            if (this.todosRadioButton.isSelected()) {
+                getTela().atacarArqueiro();
+                getTela().atacarCavaleiro();
+            } else {
+                if (this.arqueiroRadioButton.isSelected()) {
+                    getTela().atacarArqueiro();
+                }
+
+                if (this.cavaleiroRadioButton.isSelected()) {
+                    getTela().atacarCavaleiro();
+                }
+            }
+        });
     }
 
     /**

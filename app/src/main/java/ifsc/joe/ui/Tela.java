@@ -68,26 +68,70 @@ public class Tela extends JPanel {
      *
      * @param direcao direcao para movimentar
      */
-    public void movimentarAldeoes(Direcao direcao) {
+    public void movimentarTodos(Direcao direcao) {
         //TODO preciso ser melhorado
 
-        this.personagens.forEach(aldeao -> aldeao.mover(direcao, this.getWidth(), this.getHeight()));
+        this.personagens.forEach(personagem -> personagem.mover(direcao, this.getWidth(), this.getHeight()));
 
         // Depois que as coordenadas foram atualizadas é necessário repintar o JPanel
         this.repaint();
     }
 
+    public void movimentarAldeoes(Direcao direcao) {
+        this.personagens.forEach(personagem -> {
+            if (personagem instanceof Aldeao p) {
+                p.mover(direcao, this.getWidth(), this.getHeight());
+            }
+        });
+
+        this.repaint();
+    }
+
+    public void movimentarArqueiro(Direcao direcao) {
+        this.personagens.forEach(personagem -> {
+            if (personagem instanceof Arqueiro p) {
+                p.mover(direcao, this.getWidth(), this.getHeight());
+            }
+        });
+
+        this.repaint();
+    }
+
+    public void movimentarCavaleiro(Direcao direcao) {
+        this.personagens.forEach(personagem -> {
+            if (personagem instanceof Cavaleiro p) {
+                p.mover(direcao, this.getWidth(), this.getHeight());
+            }
+        });
+
+        this.repaint();
+    }
+
     /**
-     * Altera o estado do aldeão de atacando para não atacando e vice-versa
+     * Altera o estado do arqueiro de atacando para não atacando e vice-versa
      */
-    public void atacarAldeoes() {
+    public void atacarArqueiro() {
 
         //TODO preciso ser melhorado
 
         // Percorrendo a lista de aldeões e pedindo para todos atacarem
-//        this.aldeoes.forEach(Aldeao::atacar);
+        this.personagens.forEach(personagem -> {
+            if (personagem instanceof Arqueiro p) {
+                p.atacar();
+            }
+        });
 
         // Fazendo o JPanel ser redesenhado
+        this.repaint();
+    }
+
+    public void atacarCavaleiro() {
+        this.personagens.forEach(personagem -> {
+            if (personagem instanceof Cavaleiro p) {
+                p.atacar();
+            }
+        });
+
         this.repaint();
     }
 }
