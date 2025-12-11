@@ -112,20 +112,20 @@ public class Tela extends JPanel {
         this.repaint();
     }
 
-    public void montarCavaleiro(){
+    public void alternarMontadoCavaleiro(){
         this.personagens.forEach(personagem -> {
             if (personagem instanceof Cavaleiro p) {
-                p.montar();
+                p.alternarMontado();
             }
         });
 
         this.repaint();
     }
 
-    public void montarAldeao(){
+    public void alternarMontadoAldeao(){
         this.personagens.forEach(personagem -> {
             if (personagem instanceof Aldeao p) {
-                p.montar();
+                p.alternarMontado();
             }
         });
 

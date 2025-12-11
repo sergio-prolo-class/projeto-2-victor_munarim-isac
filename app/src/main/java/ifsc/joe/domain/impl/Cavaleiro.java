@@ -20,16 +20,16 @@ public class Cavaleiro extends Personagem implements Guerreiro, ComMontaria {
     public Cavaleiro(int posX, int posY) {
         super(posX, posY, NOME_IMAGEM);
         this.atacando = false;
-        velocidade = VELOCIDADE_PADRAO;
+        this.montado = true;
+        velocidade = 2 * VELOCIDADE_PADRAO;
         vida = VIDA_MAXIMA;
-        montar();
     }
 
     public void atacar() {
         this.atacando = !this.atacando;
     }
 
-    public void montar() {
+    public void alternarMontado() {
         this.montado = !this.montado;
         velocidade = this.montado ? velocidade * 2 : VELOCIDADE_PADRAO;
     }

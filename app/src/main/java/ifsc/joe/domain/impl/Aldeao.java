@@ -28,7 +28,7 @@ public class Aldeao extends Personagem implements Coletador, ComMontaria {
         this.coletando = !this.coletando;
     }
 
-    public void montar() {
+    public void alternarMontado() {
         this.montado = !this.montado;
         velocidade = this.montado ? velocidade * 2 : VELOCIDADE_PADRAO;
     }

@@ -31,6 +31,7 @@ public class PainelControles {
     private JButton buttonDireita;
     private JLabel logo;
     private JButton montarButton;
+    private JLabel feedbackLabel;
 
     public PainelControles() {
         this.sorteio = new Random();
@@ -112,15 +113,18 @@ public class PainelControles {
     private void configurarBotaoMontar() {
         montarButton.addActionListener(e -> {
             if (this.todosRadioButton.isSelected()) {
-                getTela().montarAldeao();
-                getTela().montarCavaleiro();
+                getTela().alternarMontadoAldeao();
+                getTela().alternarMontadoCavaleiro();
+                feedbackLabel.setText("<html><div style='width: 50px; text-align: justify;'>Estado montado alterado</div></html>");
             } else {
                 if (this.aldeaoRadioButton.isSelected()) {
-                    getTela().montarAldeao();
+                    getTela().alternarMontadoAldeao();
+                    feedbackLabel.setText("<html><div style='width: 50px; text-align: justify;'>Estado montado alterado</div></html>");
                 }
 
                 if (this.cavaleiroRadioButton.isSelected()) {
-                    getTela().montarCavaleiro();
+                    getTela().alternarMontadoCavaleiro();
+                    feedbackLabel.setText("<html><div style='width: 50px; text-align: justify;'>Estado montado alterado</div></html>");
                 }
             }
         });

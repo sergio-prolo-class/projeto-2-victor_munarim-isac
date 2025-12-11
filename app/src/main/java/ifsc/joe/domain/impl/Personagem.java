@@ -45,15 +45,15 @@ public abstract class Personagem {
         //Não deixa a imagem ser desenhada fora dos limites do JPanel pai
         this.posX = Math.min(Math.max(0, this.posX), maxLargura - this.icone.getWidth(null));
         // 12 por conta da barra de vida
-        this.posY = Math.min(Math.max(12, this.posY), maxAltura - this.icone.getHeight(null));
+        this.posY = Math.min(Math.max(6, this.posY), maxAltura - this.icone.getHeight(null));
     }
 
     // Quando o personagem receber dano terá que dar um repaint na tela
     public void criarBarraVida(Graphics g, int vida, int VIDA_MAXIMA){
         int x = getPosX();
-        int y = getPosY() - 12;
+        int y = getPosY() - 6;
         int larguraTotal = 40;
-        int altura = 10;
+        int altura = 5;
 
         // Fundo
         g.setColor(Color.LIGHT_GRAY);
@@ -64,7 +64,7 @@ public abstract class Personagem {
 
         // Cor baseada na porcentagem
         double porcentagem = (double) vida / VIDA_MAXIMA;
-        if (porcentagem > 0.5) {
+        if (porcentagem > 0.75) {
             g.setColor(Color.GREEN);
         } else if (porcentagem > 0.25) {
             g.setColor(Color.YELLOW);

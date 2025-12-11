@@ -1,5 +1,5 @@
 package ifsc.joe.domain.impl;
 
 public interface ComMontaria {
-    void montar();
+    void alternarMontado();
 }
