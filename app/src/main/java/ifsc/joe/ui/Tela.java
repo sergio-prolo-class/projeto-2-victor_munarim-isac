@@ -37,6 +37,39 @@ public class Tela extends JPanel {
         g.dispose();
     }
 
+    public void atualizaPlacarAldeao(JLabel placar) {
+        this.personagens.forEach(personagem -> {
+            if (personagem instanceof Aldeao p && p.getMorreu()) {
+                placar.setText(Aldeao.getMortes());
+                personagens.remove(p);
+            }
+        });
+
+        this.repaint();
+    }
+
+    public void atualizaPlacarCavaleiro(JLabel placar) {
+        this.personagens.forEach(personagem -> {
+            if (personagem instanceof Cavaleiro p && p.getMorreu()) {
+                placar.setText(Cavaleiro.getMortes());
+                personagens.remove(p);
+            }
+        });
+
+        this.repaint();
+    }
+
+    public void atualizaPlacarArqueiro(JLabel placar) {
+        this.personagens.forEach(personagem -> {
+            if (personagem instanceof Arqueiro p && p.getMorreu()) {
+                placar.setText(Arqueiro.getMortes());
+                personagens.remove(p);
+            }
+        });
+
+        this.repaint();
+    }
+
     /**
      * Cria um aldeao nas coordenadas X e Y, desenha-o neste JPanel
      * e adiciona o mesmo na lista de aldeoes
@@ -144,7 +177,7 @@ public class Tela extends JPanel {
                 p.atacar();
 
                 this.personagens.forEach(vitima -> {
-                    if (vitima != p && this.estaProximo(p, vitima)) {
+                    if (vitima != p && Personagem.estaProximo(p, vitima)) {
                         vitima.sofrerDano(Arqueiro.ATAQUE);
                     }
                 });
@@ -161,7 +194,7 @@ public class Tela extends JPanel {
                 p.atacar();
 
                 this.personagens.forEach(vitima -> {
-                    if (vitima != p && this.estaProximo(p, vitima)) {
+                    if (vitima != p && Personagem.estaProximo(p, vitima)) {
                         vitima.sofrerDano(Arqueiro.ATAQUE);
                     }
                 });
@@ -170,10 +203,5 @@ public class Tela extends JPanel {
 
         // Fazendo o JPanel ser redesenhado
         this.repaint();
-    }
-
-    public boolean estaProximo(Personagem personagemUm, Personagem personagemDois) {
-        return Math.abs(personagemUm.getPosX() - personagemDois.getPosX()) < 150
-                && Math.abs(personagemUm.getPosY() - personagemDois.getPosY()) < 150;
     }
 }

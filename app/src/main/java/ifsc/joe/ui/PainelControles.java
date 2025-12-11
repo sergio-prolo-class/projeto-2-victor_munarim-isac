@@ -32,6 +32,9 @@ public class PainelControles {
     private JLabel logo;
     private JButton montarButton;
     private JLabel feedbackLabel;
+    private JLabel placarArqueiro;
+    private JLabel placarAldeao;
+    private JLabel placarCavaleiro;
 
     public PainelControles() {
         this.sorteio = new Random();
@@ -46,6 +49,10 @@ public class PainelControles {
         configurarBotoesCriacao();
         configurarBotaoMontar();
         configurarBotaoAtaque();
+        configurarPlacar();
+        placarAldeao.setText("0");
+        placarArqueiro.setText("0");
+        placarCavaleiro.setText("0");
     }
 
     /**
@@ -192,5 +199,13 @@ public class PainelControles {
      */
     private void createUIComponents() {
         this.painelTela = new Tela();
+    }
+
+    private void configurarPlacar() {
+        atacarButton.addActionListener(e -> {
+            getTela().atualizaPlacarAldeao(placarAldeao);
+            getTela().atualizaPlacarArqueiro(placarArqueiro);
+            getTela().atualizaPlacarCavaleiro(placarCavaleiro);
+        });
     }
 }

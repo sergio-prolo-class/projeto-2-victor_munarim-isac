@@ -10,15 +10,18 @@ public abstract class Personagem {
     protected int vida, velocidade;
     protected static final int VELOCIDADE_PADRAO;
     private final Image icone;
+    private boolean morreu;
 
     static {
         VELOCIDADE_PADRAO = 10;
     }
 
-    public Personagem(int posX, int posY, String nomeImagem) {
+    public Personagem(int posX, int posY, String nomeImagem, int vida) {
         this.posX = posX;
         this.posY = posY;
         this.icone = this.carregarImagem(nomeImagem);
+        this.morreu = false;
+        this.vida = vida;
     }
 
     /**
@@ -29,7 +32,6 @@ public abstract class Personagem {
      */
     abstract public void desenhar(Graphics g, JPanel painel);
 
-    abstract public void sofrerDano(int dano);
     /**
      * Atualiza as coordenadas X e Y do personagem
      *
@@ -87,6 +89,23 @@ public abstract class Personagem {
         return posY;
     }
 
+    public void sofrerDano(int dano) {
+        this.vida = vida - dano;
+
+        if (this.vida <= 0) {
+            this.morreu = true;
+        }
+    }
+
+    public boolean getMorreu() {
+        return this.morreu;
+    }
+
+    protected void desenharMorte(Graphics g, JPanel painel, int posX, int posY) {
+        Image icone = this.carregarImagem("boom");
+        g.drawImage(icone, posX, posY, 50, 50, painel);
+    }
+
     /**
      * Metodo auxiliar para carregar uma imagem do disco
      *
@@ -97,5 +116,10 @@ public abstract class Personagem {
         return new ImageIcon(Objects.requireNonNull(
                 getClass().getClassLoader().getResource("./"+imagem+".png")
         )).getImage();
+    }
+
+    public static boolean estaProximo(Personagem personagemUm, Personagem personagemDois) {
+        return Math.abs(personagemUm.getPosX() - personagemDois.getPosX()) < 150
+                && Math.abs(personagemUm.getPosY() - personagemDois.getPosY()) < 150;
     }
 }
