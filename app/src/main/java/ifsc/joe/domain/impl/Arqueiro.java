@@ -18,7 +18,8 @@ public class Arqueiro extends Personagem implements Guerreiro, Coletador {
     public Arqueiro(int posX, int posY) {
         super(posX, posY, NOME_IMAGEM);
         this.atacando = false;
-        vida = 15;
+        vida = VIDA_MAXIMA;
+        velocidade = VELOCIDADE_PADRAO;
     }
 
     public void atacar() {

@@ -7,13 +7,18 @@ import java.util.Objects;
 
 public abstract class Personagem {
     private int posX, posY;
-    protected int vida;
+    protected int vida, velocidade;
+    protected static final int VELOCIDADE_PADRAO;
     private final Image icone;
+
+    static {
+        VELOCIDADE_PADRAO = 10;
+    }
 
     public Personagem(int posX, int posY, String nomeImagem) {
         this.posX = posX;
         this.posY = posY;
-        this.icone = this.carregarImagem(nomeImagem);;
+        this.icone = this.carregarImagem(nomeImagem);
     }
 
     /**
@@ -31,10 +36,10 @@ public abstract class Personagem {
      */
     public void mover(Direcao direcao, int maxLargura, int maxAltura) {
         switch (direcao) {
-            case CIMA -> this.posY -= 10;
-            case BAIXO -> this.posY += 10;
-            case ESQUERDA -> this.posX -= 10;
-            case DIREITA -> this.posX += 10;
+            case CIMA -> this.posY -= velocidade;
+            case BAIXO -> this.posY += velocidade;
+            case ESQUERDA -> this.posX -= velocidade;
+            case DIREITA -> this.posX += velocidade;
         }
 
         //Não deixa a imagem ser desenhada fora dos limites do JPanel pai

@@ -112,6 +112,26 @@ public class Tela extends JPanel {
         this.repaint();
     }
 
+    public void montarCavaleiro(){
+        this.personagens.forEach(personagem -> {
+            if (personagem instanceof Cavaleiro p) {
+                p.montar();
+            }
+        });
+
+        this.repaint();
+    }
+
+    public void montarAldeao(){
+        this.personagens.forEach(personagem -> {
+            if (personagem instanceof Aldeao p) {
+                p.montar();
+            }
+        });
+
+        this.repaint();
+    }
+
     /**
      * Altera o estado do arqueiro de atacando para não atacando e vice-versa
      */

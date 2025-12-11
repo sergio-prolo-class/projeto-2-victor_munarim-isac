@@ -1,5 +1,7 @@
 package ifsc.joe.domain.impl;
 
+import ifsc.joe.enums.Direcao;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -18,7 +20,8 @@ public class Aldeao extends Personagem implements Coletador, ComMontaria {
     public Aldeao(int posX, int posY) {
         super(posX, posY, NOME_IMAGEM);
         this.montado = false;
-        vida = 10;
+        vida = VIDA_MAXIMA;
+        velocidade = VELOCIDADE_PADRAO;
     }
 
     public void coletar() {
@@ -27,8 +30,10 @@ public class Aldeao extends Personagem implements Coletador, ComMontaria {
 
     public void montar() {
         this.montado = !this.montado;
+        velocidade = this.montado ? velocidade * 2 : VELOCIDADE_PADRAO;
     }
 
+    @Override
     public void desenhar(Graphics g, JPanel painel) {
         // verificando qual imagem carregar
         Image icone = this.carregarImagem(NOME_IMAGEM + (coletando ? "2" : ""));

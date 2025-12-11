@@ -1,5 +1,7 @@
 package ifsc.joe.domain.impl;
 
+import ifsc.joe.enums.Direcao;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -17,9 +19,10 @@ public class Cavaleiro extends Personagem implements Guerreiro, ComMontaria {
 
     public Cavaleiro(int posX, int posY) {
         super(posX, posY, NOME_IMAGEM);
-        this.montado = true;
         this.atacando = false;
-        vida = 20;
+        velocidade = VELOCIDADE_PADRAO;
+        vida = VIDA_MAXIMA;
+        montar();
     }
 
     public void atacar() {
@@ -28,6 +31,7 @@ public class Cavaleiro extends Personagem implements Guerreiro, ComMontaria {
 
     public void montar() {
         this.montado = !this.montado;
+        velocidade = this.montado ? velocidade * 2 : VELOCIDADE_PADRAO;
     }
 
     @Override

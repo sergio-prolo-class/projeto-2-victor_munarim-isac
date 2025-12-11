@@ -30,6 +30,7 @@ public class PainelControles {
     private JButton buttonBaixo;
     private JButton buttonDireita;
     private JLabel logo;
+    private JButton montarButton;
 
     public PainelControles() {
         this.sorteio = new Random();
@@ -42,6 +43,7 @@ public class PainelControles {
     private void configurarListeners() {
         configurarBotoesMovimento();
         configurarBotoesCriacao();
+        configurarBotaoMontar();
         configurarBotaoAtaque();
     }
 
@@ -99,6 +101,26 @@ public class PainelControles {
 
                 if (this.cavaleiroRadioButton.isSelected()) {
                     getTela().atacarCavaleiro();
+                }
+            }
+        });
+    }
+
+    /**
+     * Configura o listener do botão montar
+     */
+    private void configurarBotaoMontar() {
+        montarButton.addActionListener(e -> {
+            if (this.todosRadioButton.isSelected()) {
+                getTela().montarAldeao();
+                getTela().montarCavaleiro();
+            } else {
+                if (this.aldeaoRadioButton.isSelected()) {
+                    getTela().montarAldeao();
+                }
+
+                if (this.cavaleiroRadioButton.isSelected()) {
+                    getTela().montarCavaleiro();
                 }
             }
         });
