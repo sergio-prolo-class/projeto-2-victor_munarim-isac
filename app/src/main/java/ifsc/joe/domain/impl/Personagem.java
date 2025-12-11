@@ -29,6 +29,7 @@ public abstract class Personagem {
      */
     abstract public void desenhar(Graphics g, JPanel painel);
 
+    abstract public void sofrerDano(int dano);
     /**
      * Atualiza as coordenadas X e Y do personagem
      *

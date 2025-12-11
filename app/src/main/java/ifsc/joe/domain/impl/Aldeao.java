@@ -24,6 +24,10 @@ public class Aldeao extends Personagem implements Coletador, ComMontaria {
         velocidade = VELOCIDADE_PADRAO;
     }
 
+    public void sofrerDano(int dano) {
+        this.vida = vida - dano;
+    }
+
     public void coletar() {
         this.coletando = !this.coletando;
     }

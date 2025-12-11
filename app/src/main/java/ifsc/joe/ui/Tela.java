@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.HashSet;
 import java.util.Set;
+import java.lang.Math;
 
 public class Tela extends JPanel {
     private final Set<Personagem> personagens;
@@ -141,6 +142,12 @@ public class Tela extends JPanel {
         this.personagens.forEach(personagem -> {
             if (personagem instanceof Arqueiro p) {
                 p.atacar();
+
+                this.personagens.forEach(vitima -> {
+                    if (vitima != p && this.estaProximo(p, vitima)) {
+                        vitima.sofrerDano(Arqueiro.ATAQUE);
+                    }
+                });
             }
         });
 
@@ -152,9 +159,21 @@ public class Tela extends JPanel {
         this.personagens.forEach(personagem -> {
             if (personagem instanceof Cavaleiro p) {
                 p.atacar();
+
+                this.personagens.forEach(vitima -> {
+                    if (vitima != p && this.estaProximo(p, vitima)) {
+                        vitima.sofrerDano(Arqueiro.ATAQUE);
+                    }
+                });
             }
         });
 
+        // Fazendo o JPanel ser redesenhado
         this.repaint();
+    }
+
+    public boolean estaProximo(Personagem personagemUm, Personagem personagemDois) {
+        return Math.abs(personagemUm.getPosX() - personagemDois.getPosX()) < 150
+                && Math.abs(personagemUm.getPosY() - personagemDois.getPosY()) < 150;
     }
 }
