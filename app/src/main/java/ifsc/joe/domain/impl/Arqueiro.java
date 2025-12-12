@@ -7,7 +7,6 @@ public class Arqueiro extends Personagem implements Guerreiro, Coletador {
     public static final String NOME_IMAGEM;
     public static final int VIDA_MAXIMA;
     public static final int ATAQUE;
-    public static int mortes;
 
     private boolean atacando;
     private boolean coletando;
@@ -16,7 +15,6 @@ public class Arqueiro extends Personagem implements Guerreiro, Coletador {
         NOME_IMAGEM = "arqueiro";
         VIDA_MAXIMA = 15;
         ATAQUE = 2;
-        mortes = 0;
     }
 
     public Arqueiro(int posX, int posY) {
@@ -33,10 +31,6 @@ public class Arqueiro extends Personagem implements Guerreiro, Coletador {
         this.coletando = !this.coletando;
     }
 
-    public static String getMortes() {
-        return String.valueOf(mortes);
-    }
-
     @Override
     public void desenhar(Graphics g, JPanel painel) {
         // verificando qual imagem carregar
@@ -46,7 +40,6 @@ public class Arqueiro extends Personagem implements Guerreiro, Coletador {
 
         if (this.getMorreu()) {
             this.desenharMorte(g, painel, this.getPosX(), this.getPosY());
-            mortes++;
         }
 
         //Cria a barra de vida do personagem

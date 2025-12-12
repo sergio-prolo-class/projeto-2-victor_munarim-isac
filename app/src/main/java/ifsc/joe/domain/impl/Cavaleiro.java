@@ -9,7 +9,6 @@ public class Cavaleiro extends Personagem implements Guerreiro, ComMontaria {
     public static final String NOME_IMAGEM;
     public static final int VIDA_MAXIMA;
     public static final int ATAQUE;
-    public static int mortes;
 
     private boolean atacando;
     private boolean montado;
@@ -17,7 +16,6 @@ public class Cavaleiro extends Personagem implements Guerreiro, ComMontaria {
         NOME_IMAGEM = "cavaleiro";
         VIDA_MAXIMA = 20;
         ATAQUE = 2;
-        mortes = 0;
     }
 
     public Cavaleiro(int posX, int posY) {
@@ -36,10 +34,6 @@ public class Cavaleiro extends Personagem implements Guerreiro, ComMontaria {
         velocidade = this.montado ? velocidade * 2 : VELOCIDADE_PADRAO;
     }
 
-    public static String getMortes() {
-        return String.valueOf(mortes);
-    }
-
     @Override
     public void desenhar(Graphics g, JPanel painel) {
         // verificando qual imagem carregar
@@ -49,7 +43,6 @@ public class Cavaleiro extends Personagem implements Guerreiro, ComMontaria {
 
         if (this.getMorreu()) {
             this.desenharMorte(g, painel, this.getPosX(), this.getPosY());
-            mortes++;
         }
 
         //Cria a barra de vida do personagem

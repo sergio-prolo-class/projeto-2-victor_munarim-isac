@@ -9,7 +9,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.HashSet;
 import java.util.Set;
-import java.lang.Math;
 
 public class Tela extends JPanel {
     private final Set<Personagem> personagens;
@@ -28,20 +27,27 @@ public class Tela extends JPanel {
     public void paint(Graphics g) {
         super.paint(g);
 
+        Set<Personagem> mortos = new HashSet<>(Set.of());
+
         //TODO preciso ser melhorado
 
         // percorrendo a lista de aldeões e pedindo para cada um se desenhar na tela
-        this.personagens.forEach(personagem -> personagem.desenhar(g, this));
+        this.personagens.forEach(personagem -> {
+            personagem.desenhar(g, this);
+            if (personagem.getMorreu()) {
+                mortos.add(personagem);
+            }
+        });
 
+        personagens.removeAll(mortos);
         // liberando o contexto gráfico
         g.dispose();
     }
 
     public void atualizaPlacarAldeao(JLabel placar) {
         this.personagens.forEach(personagem -> {
-            if (personagem instanceof Aldeao p && p.getMorreu()) {
-                placar.setText(Aldeao.getMortes());
-                personagens.remove(p);
+            if (personagem instanceof Aldeao) {
+                placar.setText(Aldeao.getMortesAldoes());
             }
         });
 
@@ -50,9 +56,8 @@ public class Tela extends JPanel {
 
     public void atualizaPlacarCavaleiro(JLabel placar) {
         this.personagens.forEach(personagem -> {
-            if (personagem instanceof Cavaleiro p && p.getMorreu()) {
-                placar.setText(Cavaleiro.getMortes());
-                personagens.remove(p);
+            if (personagem instanceof Cavaleiro) {
+                placar.setText(Cavaleiro.getMortesCavaleiros());
             }
         });
 
@@ -61,9 +66,8 @@ public class Tela extends JPanel {
 
     public void atualizaPlacarArqueiro(JLabel placar) {
         this.personagens.forEach(personagem -> {
-            if (personagem instanceof Arqueiro p && p.getMorreu()) {
-                placar.setText(Arqueiro.getMortes());
-                personagens.remove(p);
+            if (personagem instanceof Arqueiro) {
+                placar.setText(Arqueiro.getMortesArqueiros());
             }
         });
 

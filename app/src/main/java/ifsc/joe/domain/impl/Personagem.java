@@ -11,9 +11,15 @@ public abstract class Personagem {
     protected static final int VELOCIDADE_PADRAO;
     private final Image icone;
     private boolean morreu;
+    private static int mortesAldoes;
+    private static int mortesCavaleiros;
+    private static int mortesArqueiros;
 
     static {
         VELOCIDADE_PADRAO = 10;
+        mortesAldoes = 0;
+        mortesCavaleiros = 0;
+        mortesArqueiros = 0;
     }
 
     public Personagem(int posX, int posY, String nomeImagem, int vida) {
@@ -94,7 +100,23 @@ public abstract class Personagem {
 
         if (this.vida <= 0) {
             this.morreu = true;
+
+            if (this instanceof Aldeao) mortesAldoes++;
+            if (this instanceof Arqueiro) mortesArqueiros++;
+            if (this instanceof Cavaleiro) mortesCavaleiros++;
         }
+    }
+
+    public static String getMortesCavaleiros() {
+        return String.valueOf(mortesCavaleiros);
+    }
+
+    public static String getMortesAldoes() {
+        return String.valueOf(mortesAldoes);
+    }
+
+    public static String getMortesArqueiros() {
+        return String.valueOf(mortesArqueiros);
     }
 
     public boolean getMorreu() {
