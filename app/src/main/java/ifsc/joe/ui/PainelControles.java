@@ -74,6 +74,7 @@ public class PainelControles {
         configurarTeclasCriacao();
         configurarTeclaMontar();
         configurarTeclaTab();
+        configurarTeclaAtaque();
     }
 
     /**
@@ -195,9 +196,29 @@ public class PainelControles {
                 if (this.arqueiroRadioButton.isSelected()) {
                     getTela().atacarArqueiro();
                 }
-
                 if (this.cavaleiroRadioButton.isSelected()) {
                     getTela().atacarCavaleiro();
+                }
+            }
+        });
+    }
+
+    private void configurarTeclaAtaque() {
+        mapaTeclas.put(KeyStroke.getKeyStroke(' '), "atacar");
+
+        mapaAcoes.put("atacar", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (todosRadioButton.isSelected()) {
+                    getTela().atacarArqueiro();
+                    getTela().atacarCavaleiro();
+                } else {
+                    if (arqueiroRadioButton.isSelected()) {
+                        getTela().atacarArqueiro();
+                    }
+                    if (cavaleiroRadioButton.isSelected()) {
+                        getTela().atacarCavaleiro();
+                    }
                 }
             }
         });
