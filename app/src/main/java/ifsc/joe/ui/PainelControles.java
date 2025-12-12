@@ -2,6 +2,7 @@ package ifsc.joe.ui;
 
 import ifsc.joe.enums.Direcao;
 import javax.swing.*;
+import java.awt.event.ActionEvent;
 import java.util.Random;
 
 /**
@@ -36,9 +37,19 @@ public class PainelControles {
     private JLabel placarAldeao;
     private JLabel placarCavaleiro;
 
+    private final InputMap mapaTeclas;
+    private final ActionMap mapaAcoes ;
+
+    //Inicializa o input e actions
+    {
+        mapaTeclas = getTela().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+        mapaAcoes = getTela().getActionMap();
+    }
+
     public PainelControles() {
         this.sorteio = new Random();
         configurarListeners();
+        configurarTeclas();
     }
 
     /**
@@ -56,6 +67,16 @@ public class PainelControles {
     }
 
     /**
+     * Configura todas as teclas.
+     */
+    private void configurarTeclas() {
+        configurarTeclasMovimento();
+        configurarTeclasCriacao();
+        configurarTeclaMontar();
+        configurarTeclaTab();
+    }
+
+    /**
      * Configura todos os listeners dos botões de movimento
      */
     private void configurarBotoesMovimento() {
@@ -63,6 +84,44 @@ public class PainelControles {
         buttonBaixo.addActionListener(e -> this.condicionalParaMovimentar(Direcao.BAIXO));
         buttonEsquerda.addActionListener(e -> this.condicionalParaMovimentar(Direcao.ESQUERDA));
         buttonDireita.addActionListener(e -> this.condicionalParaMovimentar(Direcao.DIREITA));
+    }
+
+    /**
+     * Configura as teclas para movimento
+     */
+    private void configurarTeclasMovimento() {
+        mapaTeclas.put(KeyStroke.getKeyStroke("W"), "moverCima");
+        mapaTeclas.put(KeyStroke.getKeyStroke("D"), "moverDireita");
+        mapaTeclas.put(KeyStroke.getKeyStroke("A"), "moverEsquerda");
+        mapaTeclas.put(KeyStroke.getKeyStroke("S"), "moverBaixo");
+
+        mapaAcoes.put("moverCima", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                condicionalParaMovimentar(Direcao.CIMA);
+            }
+        });
+
+        mapaAcoes.put("moverDireita", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                condicionalParaMovimentar(Direcao.DIREITA);
+            }
+        });
+
+        mapaAcoes.put("moverEsquerda", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                condicionalParaMovimentar(Direcao.ESQUERDA);
+            }
+        });
+
+        mapaAcoes.put("moverBaixo", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                condicionalParaMovimentar(Direcao.BAIXO);
+            }
+        });
     }
 
     private void condicionalParaMovimentar(Direcao direcao) {
@@ -92,6 +151,36 @@ public class PainelControles {
         bCriaCavaleiro.addActionListener(e -> criarCavaleiroAleatorio());
 
         bCriaArqueiro.addActionListener(e -> criarArqueiroAleatorio());
+    }
+
+    /**
+     * Configura todas as teclas para criação
+     */
+    private void configurarTeclasCriacao() {
+        mapaTeclas.put(KeyStroke.getKeyStroke("1"), "criarAldeao");
+        mapaTeclas.put(KeyStroke.getKeyStroke("2"), "criarArqueiro");
+        mapaTeclas.put(KeyStroke.getKeyStroke("3"), "criarCavaleiro");
+
+        mapaAcoes.put("criarAldeao", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                criarAldeaoAleatorio();
+            }
+        });
+
+        mapaAcoes.put("criarArqueiro", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                criarArqueiroAleatorio();
+            }
+        });
+
+        mapaAcoes.put("criarCavaleiro", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                criarCavaleiroAleatorio();
+            }
+        });
     }
 
     /**
@@ -132,6 +221,55 @@ public class PainelControles {
                 if (this.cavaleiroRadioButton.isSelected()) {
                     getTela().alternarMontadoCavaleiro();
                     feedbackLabel.setText("<html><div style='width: 50px; text-align: justify;'>Estado montado alterado</div></html>");
+                }
+            }
+        });
+    }
+
+    /**
+     * Configura a tecla para montar
+     */
+    private void configurarTeclaMontar() {
+        mapaTeclas.put(KeyStroke.getKeyStroke("M"), "montar");
+
+        mapaAcoes.put("montar", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (todosRadioButton.isSelected()) {
+                    getTela().alternarMontadoAldeao();
+                    getTela().alternarMontadoCavaleiro();
+                    feedbackLabel.setText("<html><div style='width: 50px; text-align: justify;'>Estado montado alterado TODOS</div></html>");
+                } else {
+                    if (aldeaoRadioButton.isSelected()) {
+                        getTela().alternarMontadoAldeao();
+                        feedbackLabel.setText("<html><div style='width: 50px; text-align: justify;'>Estado montado alterado dos ALDEÕES</div></html>");
+                    }
+                    if (cavaleiroRadioButton.isSelected()) {
+                        getTela().alternarMontadoCavaleiro();
+                        feedbackLabel.setText("<html><div style='width: 50px; text-align: justify;'>Estado montado alterado dos CAVALEIROS</div></html>");
+                    }
+                }
+            }
+        });
+    }
+
+    /**
+     * Configura tecla tab para alterar a seleção
+     */
+    private void configurarTeclaTab() {
+        mapaTeclas.put(KeyStroke.getKeyStroke('\t'), "trocarSelecao");
+
+        mapaAcoes.put("trocarSelecao", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (todosRadioButton.isSelected()) {
+                    aldeaoRadioButton.setSelected(true);
+                } else if (aldeaoRadioButton.isSelected()) {
+                    arqueiroRadioButton.setSelected(true);
+                } else if (arqueiroRadioButton.isSelected()) {
+                    cavaleiroRadioButton.setSelected(true);
+                } else if (cavaleiroRadioButton.isSelected()) {
+                    todosRadioButton.setSelected(true);
                 }
             }
         });
