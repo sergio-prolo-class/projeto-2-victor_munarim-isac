@@ -9,6 +9,7 @@ public abstract class Personagem {
     private int posX, posY;
     protected int vida, velocidade;
     protected static final int VELOCIDADE_PADRAO;
+    protected static final int LARGURA_E_ALTURA;
     private final Image icone;
     private boolean morreu;
     private static int mortesAldoes;
@@ -20,6 +21,7 @@ public abstract class Personagem {
         mortesAldoes = 0;
         mortesCavaleiros = 0;
         mortesArqueiros = 0;
+        LARGURA_E_ALTURA = 40;
     }
 
     public Personagem(int posX, int posY, String nomeImagem, int vida) {
@@ -138,10 +140,5 @@ public abstract class Personagem {
         return new ImageIcon(Objects.requireNonNull(
                 getClass().getClassLoader().getResource("./"+imagem+".png")
         )).getImage();
-    }
-
-    public static boolean estaProximo(Personagem personagemUm, Personagem personagemDois) {
-        return Math.abs(personagemUm.getPosX() - personagemDois.getPosX()) < 150
-                && Math.abs(personagemUm.getPosY() - personagemDois.getPosY()) < 150;
     }
 }

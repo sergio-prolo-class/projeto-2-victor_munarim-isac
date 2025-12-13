@@ -9,6 +9,7 @@ public class Cavaleiro extends Personagem implements Guerreiro, ComMontaria {
     public static final String NOME_IMAGEM;
     public static final int VIDA_MAXIMA;
     public static final int ATAQUE;
+    public static final int ALCANCE;
 
     private boolean atacando;
     private boolean montado;
@@ -16,6 +17,7 @@ public class Cavaleiro extends Personagem implements Guerreiro, ComMontaria {
         NOME_IMAGEM = "cavaleiro";
         VIDA_MAXIMA = 20;
         ATAQUE = 2;
+        ALCANCE = 75;
     }
 
     public Cavaleiro(int posX, int posY) {
@@ -27,6 +29,15 @@ public class Cavaleiro extends Personagem implements Guerreiro, ComMontaria {
 
     public void atacar() {
         this.atacando = !this.atacando;
+    }
+
+    public boolean alcancou(Personagem inimigo) {
+        int distanciaX = this.getPosX() - inimigo.getPosX();
+        int distanciaY = this.getPosY() - inimigo.getPosY();
+
+        int distancia = (int) Math.sqrt(Math.pow(distanciaX, 2) + Math.pow(distanciaY, 2));
+
+        return distancia <= ALCANCE + LARGURA_E_ALTURA / 2;
     }
 
     public void alternarMontado() {
@@ -47,5 +58,12 @@ public class Cavaleiro extends Personagem implements Guerreiro, ComMontaria {
 
         //Cria a barra de vida do personagem
         criarBarraVida(g, vida, VIDA_MAXIMA);
+
+        g.drawOval(
+            this.getPosX() - (ALCANCE - LARGURA_E_ALTURA / 2),
+            this.getPosY() - (ALCANCE - LARGURA_E_ALTURA / 2),
+            ALCANCE * 2,
+            ALCANCE * 2
+        );
     }
 }

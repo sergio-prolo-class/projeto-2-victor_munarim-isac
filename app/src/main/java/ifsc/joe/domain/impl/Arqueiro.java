@@ -7,6 +7,7 @@ public class Arqueiro extends Personagem implements Guerreiro, Coletador {
     public static final String NOME_IMAGEM;
     public static final int VIDA_MAXIMA;
     public static final int ATAQUE;
+    public static final int ALCANCE;
 
     private boolean atacando;
     private boolean coletando;
@@ -15,6 +16,7 @@ public class Arqueiro extends Personagem implements Guerreiro, Coletador {
         NOME_IMAGEM = "arqueiro";
         VIDA_MAXIMA = 15;
         ATAQUE = 2;
+        ALCANCE = 150;
     }
 
     public Arqueiro(int posX, int posY) {
@@ -31,6 +33,15 @@ public class Arqueiro extends Personagem implements Guerreiro, Coletador {
         this.coletando = !this.coletando;
     }
 
+    public boolean alcancou(Personagem inimigo) {
+        int distanciaX = this.getPosX() - inimigo.getPosX();
+        int distanciaY = this.getPosY() - inimigo.getPosY();
+
+        int distancia = (int) Math.sqrt(Math.pow(distanciaX, 2) + Math.pow(distanciaY, 2));
+
+        return distancia <= ALCANCE + LARGURA_E_ALTURA / 2;
+    }
+
     @Override
     public void desenhar(Graphics g, JPanel painel) {
         // verificando qual imagem carregar
@@ -44,5 +55,12 @@ public class Arqueiro extends Personagem implements Guerreiro, Coletador {
 
         //Cria a barra de vida do personagem
         criarBarraVida(g, vida, VIDA_MAXIMA);
+
+        g.drawOval(
+            this.getPosX() - (ALCANCE - LARGURA_E_ALTURA / 2),
+            this.getPosY() - (ALCANCE - LARGURA_E_ALTURA / 2),
+            ALCANCE * 2,
+            ALCANCE * 2
+        );
     }
 }

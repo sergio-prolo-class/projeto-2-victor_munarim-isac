@@ -181,7 +181,7 @@ public class Tela extends JPanel {
                 p.atacar();
 
                 this.personagens.forEach(vitima -> {
-                    if (vitima != p && Personagem.estaProximo(p, vitima)) {
+                    if (vitima != p && p.alcancou(vitima)) {
                         vitima.sofrerDano(Arqueiro.ATAQUE);
                     }
                 });
@@ -198,7 +198,7 @@ public class Tela extends JPanel {
                 p.atacar();
 
                 this.personagens.forEach(vitima -> {
-                    if (vitima != p && Personagem.estaProximo(p, vitima)) {
+                    if (vitima != p && p.alcancou(vitima)) {
                         vitima.sofrerDano(Arqueiro.ATAQUE);
                     }
                 });
