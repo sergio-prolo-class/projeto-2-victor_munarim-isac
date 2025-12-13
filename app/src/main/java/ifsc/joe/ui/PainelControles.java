@@ -5,6 +5,8 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.util.Random;
 
+import static ifsc.joe.Constantes.PADDING;
+
 /**
  * Classe responsável por gerenciar os controles e interações da interface.
  * Conecta os componentes visuais com a lógica do jogo (Tela).
@@ -304,7 +306,6 @@ public class PainelControles {
      * Cria um aldeão em posição aleatória na tela.
      */
     private void criarAldeaoAleatorio() {
-        final int PADDING = 65;
         int posX = sorteio.nextInt(painelTela.getWidth() - PADDING);
         int posY = sorteio.nextInt(painelTela.getHeight() - PADDING);
 
@@ -312,7 +313,6 @@ public class PainelControles {
     }
 
     private void criarCavaleiroAleatorio() {
-        final int PADDING = 65;
         int posX = sorteio.nextInt(painelTela.getWidth() - PADDING);
         int posY = sorteio.nextInt(painelTela.getHeight() - PADDING);
 
@@ -320,7 +320,6 @@ public class PainelControles {
     }
 
     private void criarArqueiroAleatorio() {
-        final int PADDING = 65;
         int posX = sorteio.nextInt(painelTela.getWidth() - PADDING);
         int posY = sorteio.nextInt(painelTela.getHeight() - PADDING);
 

@@ -11,17 +11,16 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import static ifsc.joe.Constantes.ATAQUE;
+
 public class Tela extends JPanel {
     private final Set<Personagem> personagens;
 
     private JLabel placarAldeao;
-
     private JLabel placarArqueiro;
-
     private JLabel placarCavaleiro;
 
     public Tela() {
-        //TODO preciso ser melhorado
         this.setBackground(Color.white);
         this.personagens = new HashSet<>();
     }
@@ -33,10 +32,7 @@ public class Tela extends JPanel {
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-
         Set<Personagem> mortos = new HashSet<>(Set.of());
-
-        //TODO preciso ser melhorado
 
         // percorrendo a lista de aldeões e pedindo para cada um se desenhar na tela
         this.personagens.forEach(personagem -> {
@@ -172,7 +168,7 @@ public class Tela extends JPanel {
                 this.personagens.forEach(vitima -> {
                     if (vitima != p && p.alcancou(vitima)) {
                         if (vitima.esquivar()) {
-                            vitima.sofrerDano(Arqueiro.ATAQUE);
+                            vitima.sofrerDano(ATAQUE);
                         }
                     }
                 });
@@ -191,7 +187,7 @@ public class Tela extends JPanel {
                 this.personagens.forEach(vitima -> {
                     if (vitima != p && p.alcancou(vitima)) {
                         if (vitima.esquivar()) {
-                            vitima.sofrerDano(Cavaleiro.ATAQUE);
+                            vitima.sofrerDano(ATAQUE);
                         }
                     }
                 });
