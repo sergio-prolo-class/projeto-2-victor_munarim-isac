@@ -8,6 +8,7 @@ public class Cavaleiro extends Personagem implements Guerreiro, ComMontaria {
     public static final int VIDA_MAXIMA;
     public static final int ATAQUE;
     public static final int ALCANCE;
+    public static final int CHANCE_ESQUIVA;
 
     private boolean atacando;
     private boolean montado;
@@ -16,10 +17,11 @@ public class Cavaleiro extends Personagem implements Guerreiro, ComMontaria {
         VIDA_MAXIMA = 20;
         ATAQUE = 2;
         ALCANCE = 75;
+        CHANCE_ESQUIVA = 15;
     }
 
     public Cavaleiro(int posX, int posY) {
-        super(posX, posY, NOME_IMAGEM, VIDA_MAXIMA);
+        super(posX, posY, NOME_IMAGEM, VIDA_MAXIMA, CHANCE_ESQUIVA);
         this.atacando = false;
         this.montado = true;
         velocidade = 2 * VELOCIDADE_PADRAO;
@@ -52,6 +54,10 @@ public class Cavaleiro extends Personagem implements Guerreiro, ComMontaria {
 
         if (this.getMorreu()) {
             this.desenharMorte(g, painel, this.getPosX(), this.getPosY());
+        }
+
+        if (this.getEsquivou()) {
+            this.desenhaEsquiva(g, painel, this.getPosX(), this.getPosY());
         }
 
         //Cria a barra de vida do personagem

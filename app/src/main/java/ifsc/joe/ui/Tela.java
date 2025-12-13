@@ -8,10 +8,17 @@ import ifsc.joe.enums.Direcao;
 import javax.swing.*;
 import java.awt.*;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 public class Tela extends JPanel {
     private final Set<Personagem> personagens;
+
+    private JLabel placarAldeao;
+
+    private JLabel placarArqueiro;
+
+    private JLabel placarCavaleiro;
 
     public Tela() {
         //TODO preciso ser melhorado
@@ -42,34 +49,16 @@ public class Tela extends JPanel {
         personagens.removeAll(mortos);
         // liberando o contexto gráfico
         g.dispose();
+
+        if (!Objects.isNull(this.placarAldeao)) this.placarAldeao.setText(Aldeao.getMortesAldoes());
+        if (!Objects.isNull(this.placarArqueiro)) this.placarArqueiro.setText(Arqueiro.getMortesArqueiros());
+        if (!Objects.isNull(this.placarCavaleiro)) this.placarCavaleiro.setText(Cavaleiro.getMortesCavaleiros());
     }
 
-    public void atualizaPlacarAldeao(JLabel placar) {
-        this.personagens.forEach(personagem -> {
-            if (personagem instanceof Aldeao) {
-                placar.setText(Aldeao.getMortesAldoes());
-            }
-        });
-
-        this.repaint();
-    }
-
-    public void atualizaPlacarCavaleiro(JLabel placar) {
-        this.personagens.forEach(personagem -> {
-            if (personagem instanceof Cavaleiro) {
-                placar.setText(Cavaleiro.getMortesCavaleiros());
-            }
-        });
-
-        this.repaint();
-    }
-
-    public void atualizaPlacarArqueiro(JLabel placar) {
-        this.personagens.forEach(personagem -> {
-            if (personagem instanceof Arqueiro) {
-                placar.setText(Arqueiro.getMortesArqueiros());
-            }
-        });
+    public void atualizaPlacar(JLabel placarAldeao, JLabel placarArqueiro, JLabel placarCavaleiro) {
+        this.placarAldeao = placarAldeao;
+        this.placarArqueiro = placarArqueiro;
+        this.placarCavaleiro = placarCavaleiro;
 
         this.repaint();
     }
@@ -182,7 +171,9 @@ public class Tela extends JPanel {
 
                 this.personagens.forEach(vitima -> {
                     if (vitima != p && p.alcancou(vitima)) {
-                        vitima.sofrerDano(Arqueiro.ATAQUE);
+                        if (vitima.esquivar()) {
+                            vitima.sofrerDano(Arqueiro.ATAQUE);
+                        }
                     }
                 });
             }
@@ -199,7 +190,9 @@ public class Tela extends JPanel {
 
                 this.personagens.forEach(vitima -> {
                     if (vitima != p && p.alcancou(vitima)) {
-                        vitima.sofrerDano(Cavaleiro.ATAQUE);
+                        if (vitima.esquivar()) {
+                            vitima.sofrerDano(Cavaleiro.ATAQUE);
+                        }
                     }
                 });
             }

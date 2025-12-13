@@ -6,6 +6,7 @@ import java.awt.*;
 public class Aldeao extends Personagem implements Coletador, ComMontaria {
     public static final String NOME_IMAGEM;
     public static final int VIDA_MAXIMA;
+    public static final int CHANCE_ESQUIVA;
 
     private boolean coletando;
     private boolean montado;
@@ -13,10 +14,11 @@ public class Aldeao extends Personagem implements Coletador, ComMontaria {
     static {
         NOME_IMAGEM = "aldeao";
         VIDA_MAXIMA = 10;
+        CHANCE_ESQUIVA = 10;
     }
 
     public Aldeao(int posX, int posY) {
-        super(posX, posY, NOME_IMAGEM, VIDA_MAXIMA);
+        super(posX, posY, NOME_IMAGEM, VIDA_MAXIMA, CHANCE_ESQUIVA);
         this.montado = false;
         velocidade = VELOCIDADE_PADRAO;
     }
@@ -39,6 +41,11 @@ public class Aldeao extends Personagem implements Coletador, ComMontaria {
 
         if (this.getMorreu()) {
             this.desenharMorte(g, painel, this.getPosX(), this.getPosY());
+        }
+
+        if (this.getEsquivou()) {
+            this.desenhaEsquiva(g, painel, this.getPosX(), this.getPosY());
+            this.setEsquivou(false);
         }
 
         //Cria a barra de vida do personagem

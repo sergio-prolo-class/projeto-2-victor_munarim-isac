@@ -8,6 +8,7 @@ public class Arqueiro extends Personagem implements Guerreiro, Coletador {
     public static final int VIDA_MAXIMA;
     public static final int ATAQUE;
     public static final int ALCANCE;
+    public static final int CHANCE_ESQUIVA;
 
     private boolean atacando;
     private boolean coletando;
@@ -17,10 +18,11 @@ public class Arqueiro extends Personagem implements Guerreiro, Coletador {
         VIDA_MAXIMA = 15;
         ATAQUE = 2;
         ALCANCE = 150;
+        CHANCE_ESQUIVA = 25;
     }
 
     public Arqueiro(int posX, int posY) {
-        super(posX, posY, NOME_IMAGEM, VIDA_MAXIMA);
+        super(posX, posY, NOME_IMAGEM, VIDA_MAXIMA, CHANCE_ESQUIVA);
         this.atacando = false;
         velocidade = VELOCIDADE_PADRAO;
     }
@@ -51,6 +53,10 @@ public class Arqueiro extends Personagem implements Guerreiro, Coletador {
 
         if (this.getMorreu()) {
             this.desenharMorte(g, painel, this.getPosX(), this.getPosY());
+        }
+
+        if (this.getEsquivou()) {
+            this.desenhaEsquiva(g, painel, this.getPosX(), this.getPosY());
         }
 
         //Cria a barra de vida do personagem

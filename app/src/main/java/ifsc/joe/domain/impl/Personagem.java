@@ -4,6 +4,7 @@ import ifsc.joe.enums.Direcao;
 import javax.swing.*;
 import java.awt.*;
 import java.util.Objects;
+import java.util.Random;
 
 public abstract class Personagem {
     private int posX, posY;
@@ -15,6 +16,8 @@ public abstract class Personagem {
     private static int mortesAldoes;
     private static int mortesCavaleiros;
     private static int mortesArqueiros;
+    private final int chanceEsquiva;
+    private boolean esquivou;
 
     static {
         VELOCIDADE_PADRAO = 10;
@@ -24,12 +27,13 @@ public abstract class Personagem {
         LARGURA_E_ALTURA = 40;
     }
 
-    public Personagem(int posX, int posY, String nomeImagem, int vida) {
+    public Personagem(int posX, int posY, String nomeImagem, int vida, int esquiva) {
         this.posX = posX;
         this.posY = posY;
         this.icone = this.carregarImagem(nomeImagem);
         this.morreu = false;
         this.vida = vida;
+        this.chanceEsquiva = esquiva;
     }
 
     /**
@@ -128,6 +132,25 @@ public abstract class Personagem {
     protected void desenharMorte(Graphics g, JPanel painel, int posX, int posY) {
         Image icone = this.carregarImagem("boom");
         g.drawImage(icone, posX, posY, 50, 50, painel);
+    }
+
+    protected void desenhaEsquiva(Graphics g, JPanel painel, int posX, int posY) {
+        Image icone = this.carregarImagem("blow");
+        g.drawImage(icone, posX, posY, 50, 50, painel);
+    }
+
+    public boolean esquivar() {
+        Random random = new Random();
+        this.esquivou = random.nextInt(100) < this.chanceEsquiva;
+        return this.esquivou;
+    }
+
+    protected boolean getEsquivou() {
+        return esquivou;
+    }
+
+    public void setEsquivou(boolean esquivou) {
+        this.esquivou = esquivou;
     }
 
     /**

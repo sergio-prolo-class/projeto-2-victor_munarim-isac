@@ -365,10 +365,6 @@ public class PainelControles {
     }
 
     private void configurarPlacar() {
-        atacarButton.addActionListener(e -> {
-            getTela().atualizaPlacarAldeao(placarAldeao);
-            getTela().atualizaPlacarArqueiro(placarArqueiro);
-            getTela().atualizaPlacarCavaleiro(placarCavaleiro);
-        });
+        getTela().atualizaPlacar(placarAldeao, placarArqueiro, placarCavaleiro);
     }
 }
