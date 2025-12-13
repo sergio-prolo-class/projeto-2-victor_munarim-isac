@@ -2,12 +2,12 @@ package ifsc.joe.ui;
 
 import javax.swing.*;
 
+import static ifsc.joe.Constantes.TITULO;
+
 /**
  * Classe responsável pela configuração e exibição da janela principal do jogo.
  */
 public class JanelaJogo {
-
-    private static final String TITULO = "Java of Empires";
     private final JFrame frame;
     private final PainelControles painelControles;
 

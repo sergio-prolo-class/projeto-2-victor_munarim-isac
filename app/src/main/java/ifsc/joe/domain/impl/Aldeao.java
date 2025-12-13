@@ -3,22 +3,14 @@ package ifsc.joe.domain.impl;
 import javax.swing.*;
 import java.awt.*;
 
-public class Aldeao extends Personagem implements Coletador, ComMontaria {
-    public static final String NOME_IMAGEM;
-    public static final int VIDA_MAXIMA;
-    public static final int CHANCE_ESQUIVA;
+import static ifsc.joe.Constantes.*;
 
+public class Aldeao extends Personagem implements Coletador, ComMontaria {
     private boolean coletando;
     private boolean montado;
 
-    static {
-        NOME_IMAGEM = "aldeao";
-        VIDA_MAXIMA = 10;
-        CHANCE_ESQUIVA = 10;
-    }
-
     public Aldeao(int posX, int posY) {
-        super(posX, posY, NOME_IMAGEM, VIDA_MAXIMA, CHANCE_ESQUIVA);
+        super(posX, posY, NOME_IMAGEM_ALDEAO, VIDA_MAXIMA_ALDEAO, CHANCE_ESQUIVA_ALDEAO);
         this.montado = false;
         velocidade = VELOCIDADE_PADRAO;
     }
@@ -35,7 +27,7 @@ public class Aldeao extends Personagem implements Coletador, ComMontaria {
     @Override
     public void desenhar(Graphics g, JPanel painel) {
         // verificando qual imagem carregar
-        Image icone = this.carregarImagem(NOME_IMAGEM + (coletando ? "2" : ""));
+        Image icone = this.carregarImagem(NOME_IMAGEM_ALDEAO + (coletando ? "2" : ""));
         // desenhando de fato a imagem no pai
         g.drawImage(icone, this.getPosX(), this.getPosY(), painel);
 
@@ -49,6 +41,6 @@ public class Aldeao extends Personagem implements Coletador, ComMontaria {
         }
 
         //Cria a barra de vida do personagem
-        criarBarraVida(g, vida, VIDA_MAXIMA);
+        criarBarraVida(g, vida, VIDA_MAXIMA_ALDEAO);
     }
 }
