@@ -285,12 +285,16 @@ public class PainelControles {
             public void actionPerformed(ActionEvent e) {
                 if (todosRadioButton.isSelected()) {
                     aldeaoRadioButton.setSelected(true);
+                    aldeaoRadioButton.requestFocus();
                 } else if (aldeaoRadioButton.isSelected()) {
                     arqueiroRadioButton.setSelected(true);
+                    arqueiroRadioButton.requestFocus();
                 } else if (arqueiroRadioButton.isSelected()) {
                     cavaleiroRadioButton.setSelected(true);
+                    cavaleiroRadioButton.requestFocus();
                 } else if (cavaleiroRadioButton.isSelected()) {
                     todosRadioButton.setSelected(true);
+                    todosRadioButton.requestFocus();
                 }
             }
         });
