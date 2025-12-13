@@ -199,7 +199,7 @@ public class Tela extends JPanel {
 
                 this.personagens.forEach(vitima -> {
                     if (vitima != p && p.alcancou(vitima)) {
-                        vitima.sofrerDano(Arqueiro.ATAQUE);
+                        vitima.sofrerDano(Cavaleiro.ATAQUE);
                     }
                 });
             }
